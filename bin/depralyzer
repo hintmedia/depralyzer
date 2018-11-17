@@ -8,13 +8,11 @@ require 'depralyzer/version'
 require 'depralyzer/generator'
 
 print_version = false
-spec_dir      = './spec'
-exc_spec_dir  = nil
 
 opt = OptionParser.new
 
-opt.on('-o VAL', 'Output file') { |dir| outfile = dir }
-opt.on('--output-file VAL', '') { |dir| outfile = dir }
+opt.on('-o VAL', 'Output file') { |file| outfile = file }
+opt.on('--output-file VAL', '') { |file| outfile = file }
 
 opt.on('-v', 'Print version') { |_| print_version = true }
 opt.on('--version', '') { |_| print_version = true }
@@ -32,6 +30,6 @@ if dir_or_file.nil?
   exit 1
 end
 
-generator = Depralyzer::Generator.new(outfile)
+generator = Depralyzer::Generator.new(dir_or_file)
 generator.process
 
