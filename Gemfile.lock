@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    depralyzer (0.1.0)
+    depralyzer (0.1.1)
 
 GEM
   remote: https://rubygems.org/

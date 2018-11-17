@@ -13,8 +13,8 @@ module Depralyzer
     end
   end
 
-  def self.analyze(file_path)
-    generator = Depralyzer::Generator.new(spec_dir)
-    generator.write_spec(file_path, force_write, dry_run)
+  def self.process(file_path)
+    generator = Depralyzer::Generator.new(file_path)
+    generator.process
   end
 end
