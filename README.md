@@ -2,7 +2,6 @@
 
 This gem will help you analyze the morass of deprecation warnings when you are planning an upgrade.
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/f4a2577cd12ddb9c75ff/maintainability)](https://codeclimate.com/github/tjchambers/depralyzer/maintainability)
 
 ## Installation
 
