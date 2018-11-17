@@ -2,7 +2,4 @@
 
 require 'simplecov'
 
-if ENV['TRAVIS']
-else
-  SimpleCov.start
-end
+SimpleCov.start

@@ -7,7 +7,7 @@ RSpec.describe Depralyzer do
   describe '#process' do
     it 'works' do
       file_path = 'samples/deprecation.log'
-    
+
       described_class.process(file_path)
     end
   end
