@@ -1,0 +1,97 @@
+require: rubocop-rspec
+
+AllCops:
+  # Include gemspec and Rakefile
+  TargetRubyVersion: 2.4
+  Include:
+    - '**/*.rb'
+  Exclude:
+    - 'bin/**/*'
+    - 'tmp/**/*' 
+    - 'vendor/**/*'
+    - 'Guardfile'
+
+AsciiComments:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Max: 8 
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 80
+
+Style/AsciiComments:
+  Enabled: false
+
+# Respect RubyMine formatter
+Layout/CaseIndentation:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+# Name reduce block params |a, e|.
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# Respect RubyMine formatter
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Cannot deal with AR#eager_load
+Style/SymbolProc:
+  Enabled: false
+
+# Final newline missing.
+Layout/TrailingBlankLines:
+  Enabled: false
+
+TrivialAccessors:
+  Enabled: true
+  ExactNameMatch: true
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Layout/AlignArray:
+  Enabled: false
+
+# Do not prefix writer method names with set_
+Layout/AccessorMethodName:
+  Enabled: false
+
+Rails/Output:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false

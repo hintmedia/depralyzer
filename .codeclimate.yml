@@ -1,0 +1,20 @@
+---
+version: "2"
+plugins:
+  rubocop:
+    enabled: true
+    #checks:
+    # Rubocop/Metrics/ClassLength:
+    #   enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+exclude_patterns:
+- config/application.rb
+- vendor/**/*
+- log/**/*
+- tmp/**/*
+- test/**/*
+- factories/**/*

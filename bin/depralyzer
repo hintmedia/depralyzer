@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+#
+# depralyzer [dir/*.rb]
+#
+
+require 'optparse'
+require 'depralyzer/version'
+require 'depralyzer/generator'
+
+print_version = false
+spec_dir      = './spec'
+exc_spec_dir  = nil
+
+opt = OptionParser.new
+
+opt.on('-o VAL', 'Output directory (default: ./spec)') { |dir| spec_dir = dir }
+opt.on('--output-dir VAL', '') { |dir| spec_dir = dir }
+
+opt.on('-v', 'Print version') { |_| print_version = true }
+opt.on('--version', '') { |_| print_version = true }
+
+args = opt.parse(ARGV)
+
+if print_version
+  puts "depralyzer #{Depralyzer::VERSION}"
+  exit 0
+end
+
+dir_or_file = args.first
+if dir_or_file.nil?
+  puts "Usage: depralyzer [dir/*.rb] -options"
+  exit 1
+end
+unless dir_or_file.match(/.rb$/)
+  dir_or_file = dir_or_file.gsub(/\/$/, '') + "/**/*.rb"
+end
+
+generator = Depralyzer::Generator.new(spec_dir)
+
+files = Dir.glob(dir_or_file)
+files -= Dir.glob(exc_spec_dir) if exc_spec_dir
+
+files.each do |file_path|
+  generator.write_spec(file_path, force_write, dry_run, rails_mode)
+end
+
