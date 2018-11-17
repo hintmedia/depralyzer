@@ -23,10 +23,13 @@ module Depralyzer
     
     def pretty_output(summary)
       puts "Total of #{summary.size} deprecation types with #{occurrence(summary)} occurrences"
-      summary.each do |top, details|
+      m1 = summary.sort_by { |_, value| -value.values.inject(0) { |sum, x| sum + x }}.to_h
+      m1.each do |top, details|
         puts 
-        puts "### #{top}"
-        details.each do |note, cnt|
+        puts "### #{top} (#{details.values.inject(0) { |sum, x| sum + x }})"
+
+        m = details.sort_by { |_, value| -value}.to_h
+        m.each do |note, cnt|
           puts sprintf("- %10d %s", cnt, note)
         end
       end
