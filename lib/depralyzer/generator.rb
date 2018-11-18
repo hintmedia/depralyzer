@@ -26,27 +26,55 @@ module Depralyzer
       m1 = summary.sort_by { |_, value| -value.values.inject(0) { |sum, x| sum + x } }.to_h
       m1.each do |top, details|
         puts
-        puts "### #{top.gsub('_','\_')} (#{details.values.inject(0) { |sum, x| sum + x }})"
+        puts "### #{top.gsub('_', '\_')} (#{details.size}) - _est: #{fix_time(details.size)}_"
 
         annotation, new_details = deannotate(details)
 
         if annotation
-          puts "##### #{annotation.gsub('_','\_')}"
+          puts "##### #{annotation.gsub('_', '\_')}"
         end
-        
+
         m = new_details.sort_by { |_, value| -value }.to_h
         m.each do |note, cnt|
-          puts sprintf("- %10d %s", cnt, note.gsub('_','\_'))
+          puts sprintf("- %10d %s", cnt, note.gsub('_', '\_'))
         end
       end
     end
 
+    ONE_FIX = 15 * 60
+
+    def fix_time(details)
+      seconds_to_string(details * ONE_FIX)
+    end
+
+    def seconds_to_string(s)
+
+      # d = days, h = hours, m = minutes, s = seconds
+      m = (s / 60).floor
+      s = s % 60
+      h = (m / 60).floor
+      m = m % 60
+      d = (h / 24).floor
+      h = h % 24
+    
+      output = "#{m} minute#{pluralize(m)}" if (m > 0)
+      output = "#{h} hour#{pluralize(h)}, #{m} minute#{pluralize(m)}" if (h > 0)
+      output = "#{d} day#{pluralize(d)}, #{h} hour#{pluralize(h)}, #{m} minute#{pluralize(m)}" if (d > 0)
+
+      output.gsub(', 0 minutes','').gsub(', 0 hours','')
+    end
+
+    def pluralize number
+      return "s" unless number == 1
+      ""
+    end
+
     def deannotate(details)
-      guess, _ = details.keys[0].split('. (', 2)
+      guess, _    = details.keys[0].split('. (', 2)
       new_details = {}
       details.each do |key, value|
         if key.start_with?(guess)
-          _, rest =  key.split('. (', 2)
+          _, rest                 = key.split('. (', 2)
           new_details["(#{rest}"] = value
         else
           return [nil, details]
@@ -58,9 +86,7 @@ module Depralyzer
     def occurrence(summary)
       i = 0
       summary.each do |_, detail|
-        detail.each do |_, cnt|
-          i += cnt
-        end
+        i += detail.size
       end
       i
     end
