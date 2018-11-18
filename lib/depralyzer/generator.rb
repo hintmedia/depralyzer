@@ -26,13 +26,33 @@ module Depralyzer
       m1 = summary.sort_by { |_, value| -value.values.inject(0) { |sum, x| sum + x } }.to_h
       m1.each do |top, details|
         puts
-        puts "### #{top} (#{details.values.inject(0) { |sum, x| sum + x }})"
+        puts "### #{top.gsub('_','\_')} (#{details.values.inject(0) { |sum, x| sum + x }})"
 
-        m = details.sort_by { |_, value| -value }.to_h
+        annotation, new_details = deannotate(details)
+
+        if annotation
+          puts "##### #{annotation.gsub('_','\_')}"
+        end
+        
+        m = new_details.sort_by { |_, value| -value }.to_h
         m.each do |note, cnt|
-          puts sprintf("- %10d %s", cnt, note)
+          puts sprintf("- %10d %s", cnt, note.gsub('_','\_'))
         end
       end
+    end
+
+    def deannotate(details)
+      guess, _ = details.keys[0].split('. (', 2)
+      new_details = {}
+      details.each do |key, value|
+        if key.start_with?(guess)
+          _, rest =  key.split('. (', 2)
+          new_details["(#{rest}"] = value
+        else
+          return [nil, details]
+        end
+      end
+      [guess, new_details]
     end
 
     def occurrence(summary)
