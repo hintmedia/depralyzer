@@ -29,3 +29,11 @@ DEPRECATION WARNING: Relation#all is deprecated. If you want to eager-load a rel
 /somewhere/pretend/app/views/xxxs/workspace_xxx/_contact_asset_location_form.html.haml:50: warning: duplicated key at line 50 ignored: :class
 DEPRECATION WARNING: Passing the prompt to grouped_options_for_select as an argument is deprecated. Please use an options hash like `{ prompt: " " }`. (called from xxx_code_14_select_tag at /somewhere/pretend/app/helpers/xxx_helper.rb:22)
 DEPRECATION WARNING: Relation#all is deprecated. If you want to eager-load a relation, you can call #load (e.g. `Post.where(published: true).load`). If you want to get an array of records from a relation, you can call #to_a (e.g. `Post.where(published: true).to_a`). (called from all_data at /somewhere/pretend/app/models/xxx/code_key888.rb:13)
+I, [2018-12-11T16:48:33.488518 #49073]  INFO -- : DEPRECATION WARNING: The following options in your Survey.has_many :questions declaration are deprecated: :order. Please use a scope block instead. For example, the following:
+
+    has_many :spam_comments, conditions: { spam: true }, class_name: 'Comment'
+
+should be rewritten as the following:
+
+    has_many :spam_comments, -> { where spam: true }, class_name: 'Comment'
+. (called from <class:Survey> at /somewhere/app/models/survey.rb:15)

@@ -7,7 +7,7 @@ require 'depralyzer'
 module Depralyzer
   class Generator
 
-    DEPRECATION_FORMAT = /DEPRECATION WARNING: .+?. \(called from .+?\)$/
+    DEPRECATION_FORMAT = /DEPRECATION WARNING: .+?. \(called from .+?\)$/m
 
     attr_accessor :input
 
