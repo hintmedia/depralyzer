@@ -70,6 +70,9 @@ module Depralyzer
     end
 
     def deannotate(details)
+      unless details.keys[0]
+        return [nil, {}]
+      end
       guess, _    = details.keys[0].split('. (', 2)
       new_details = {}
       details.each do |key, value|
