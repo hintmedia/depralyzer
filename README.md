@@ -52,9 +52,9 @@ Total of 5 deprecation types with 24 occurrences
 
 ## License
 
-Copyright (c) 2018 - Tim Chambers
+Copyright (c) 2018 - Hint Media, Inc.
 
 MIT License
 
-https://github.com/tjchambers/depralyzer/blob/master/LICENSE.txt
+https://github.com/hintmedia/depralyzer/blob/master/LICENSE.txt
 
